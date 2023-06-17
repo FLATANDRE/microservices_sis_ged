@@ -1,16 +1,16 @@
-package com.sgedblk.metadadosdocumentos.entity;
+package com.sgedblk.metadadosdocumentos.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+
 @Data
 @AllArgsConstructor
-@Document(collection = "doc_metadata")
-public class DocumentMetadata {
-    @Id
+@NoArgsConstructor
+public class DocumentMetadataDTO {
     private String id;
     private String user;
     private String docCID;

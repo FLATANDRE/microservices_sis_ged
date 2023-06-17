@@ -6,4 +6,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface DocumentMetadataRepository extends MongoRepository<DocumentMetadata, String> {
+
+    void deleteByDocCID(String docCID);
 }
