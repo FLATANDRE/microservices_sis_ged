@@ -8,9 +8,9 @@ import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import javax.print.Doc;
+import java.time.LocalDateTime;
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Objects;
 
 @AllArgsConstructor
 @RestController
@@ -22,7 +22,9 @@ public class DocumentMetadataController {
 
     @GetMapping(value = "/{docCID}")
     public DocumentMetadataDTO findByDocCID(@PathVariable String docCID) {
-        return modelMapper.map(documentMetadataService.findByDocCID(docCID),DocumentMetadataDTO.class);
+        DocumentMetadata doc = documentMetadataService.findByDocCID(docCID);
+        if (Objects.isNull(doc)) return null;
+        return modelMapper.map(doc,DocumentMetadataDTO.class);
     }
     @GetMapping(value = "/user/{userId}/documents")
     public List<DocumentMetadataDTO> findByUser(@PathVariable String userId) {
@@ -30,9 +32,10 @@ public class DocumentMetadataController {
         return documents.stream().map(doc -> modelMapper.map(doc,DocumentMetadataDTO.class)).toList();
     }
 
-    @PostMapping
+    @PostMapping(consumes = "application/json")
     @ResponseStatus(HttpStatus.OK)
     public DocumentMetadataDTO saveOrUpdate(@RequestBody DocumentMetadataDTO documentMetadataDTO) {
+        documentMetadataDTO.setDate(LocalDateTime.now());
         DocumentMetadata doc = documentMetadataService.saveOrUpdate(modelMapper.map(documentMetadataDTO,DocumentMetadata.class));
         return modelMapper.map(doc,DocumentMetadataDTO.class);
     }

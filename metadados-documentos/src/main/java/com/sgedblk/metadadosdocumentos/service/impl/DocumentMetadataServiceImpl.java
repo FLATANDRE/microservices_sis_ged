@@ -6,7 +6,6 @@ import com.sgedblk.metadadosdocumentos.service.DocumentMetadataService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 @AllArgsConstructor
@@ -16,13 +15,12 @@ public class DocumentMetadataServiceImpl implements DocumentMetadataService {
 
     @Override
     public DocumentMetadata findByDocCID(String docCID) {
-        return new DocumentMetadata("as3dasd213","ldsfjskidf324324","sdgsgsdf2323trsdg","teste.doc", LocalDateTime.now(),1);
+        return documentMetadataRepository.findByDocCID(docCID);
     }
 
     @Override
     public List<DocumentMetadata> findByUser(String user) {
-        DocumentMetadata doc = new DocumentMetadata("as3dasd213","ldsfjskidf324324","sdgsgsdf2323trsdg","teste.doc",LocalDateTime.now(),1);
-        return List.of(doc);
+       return documentMetadataRepository.findByUser(user);
     }
 
     @Override
