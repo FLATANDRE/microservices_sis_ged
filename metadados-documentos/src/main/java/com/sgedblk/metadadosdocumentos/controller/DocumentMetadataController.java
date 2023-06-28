@@ -35,8 +35,7 @@ public class DocumentMetadataController {
     @PostMapping(consumes = "application/json")
     @ResponseStatus(HttpStatus.OK)
     public DocumentMetadataDTO saveOrUpdate(@RequestBody DocumentMetadataDTO documentMetadataDTO) {
-        documentMetadataDTO.setDate(LocalDateTime.now());
-        DocumentMetadata doc = documentMetadataService.saveOrUpdate(modelMapper.map(documentMetadataDTO,DocumentMetadata.class));
+        DocumentMetadata doc = documentMetadataService.insertDefaultValuesAndSave(modelMapper.map(documentMetadataDTO,DocumentMetadata.class));
         return modelMapper.map(doc,DocumentMetadataDTO.class);
     }
 

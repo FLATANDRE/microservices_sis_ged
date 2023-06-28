@@ -8,6 +8,7 @@ public interface DocumentMetadataService {
 
     DocumentMetadata findByDocCID(String docCID);
     List<DocumentMetadata> findByUser(String user);
+    DocumentMetadata insertDefaultValuesAndSave(DocumentMetadata documentMetadata);
     DocumentMetadata saveOrUpdate(DocumentMetadata documentMetadata);
     void deleteDocumentMetadataByCID(String CID);
 }

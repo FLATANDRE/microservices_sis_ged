@@ -6,6 +6,7 @@ import com.sgedblk.metadadosdocumentos.service.DocumentMetadataService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @AllArgsConstructor
@@ -21,6 +22,13 @@ public class DocumentMetadataServiceImpl implements DocumentMetadataService {
     @Override
     public List<DocumentMetadata> findByUser(String user) {
        return documentMetadataRepository.findByUser(user);
+    }
+
+    @Override
+    public DocumentMetadata insertDefaultValuesAndSave(DocumentMetadata documentMetadata) {
+        documentMetadata.setDate(LocalDateTime.now());
+        documentMetadata.setVersion(1);
+        return saveOrUpdate(documentMetadata);
     }
 
     @Override
