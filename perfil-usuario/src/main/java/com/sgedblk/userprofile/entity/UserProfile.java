@@ -1,5 +1,6 @@
 package com.sgedblk.userprofile.entity;
 
+import com.sgedblk.userprofile.enums.UserStatus;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -17,5 +18,5 @@ public class UserProfile {
     private String name;
     private String email;
     private String userInfo;
-    private String status;
+    private UserStatus status;
 }
